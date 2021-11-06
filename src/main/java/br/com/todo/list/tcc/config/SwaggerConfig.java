@@ -21,11 +21,11 @@ import java.util.ArrayList;
 public class SwaggerConfig {
 	
 	@Bean
-    public Docket productApi() {
+    public Docket todoApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.todo.list.tcc"))
-                .paths(regex("/login.*"))
+                .paths(regex("/be.*"))
                 .build()
                 .apiInfo(metaInfo());
     }

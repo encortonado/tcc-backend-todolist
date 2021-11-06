@@ -2,12 +2,17 @@ package br.com.todo.list.tcc.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+
+
+@Entity
+@Table(name = "TB_TODO")
 public class Todo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -16,14 +21,27 @@ public class Todo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne(targetEntity = User.class)
-	private long id_user;
+	@ManyToOne()
+	private User user;
 	
 	private String name_todo;
 	
 	private String description;
 
 	private boolean done;
+	
+	public Todo() {
+		
+	}
+
+	public Todo(long id, User user, String name_todo, String description, boolean done) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.name_todo = name_todo;
+		this.description = description;
+		this.done = done;
+	}
 
 	public long getId() {
 		return id;
@@ -33,12 +51,12 @@ public class Todo implements Serializable {
 		this.id = id;
 	}
 
-	public long getId_user() {
-		return id_user;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setId_user(long id_user) {
-		this.id_user = id_user;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getName_todo() {
