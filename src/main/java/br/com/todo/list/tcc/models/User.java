@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private long id;
 	
 	
-	private String name;
+	protected String name;
 	
 	private String lastName;
 	
@@ -31,7 +31,7 @@ public class User implements Serializable {
 	private String birthDate;
 	
 	
-	private int password;
+	protected int password;
 
 	
 	

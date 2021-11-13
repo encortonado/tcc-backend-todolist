@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.todo.list.tcc.models.Login;
 import br.com.todo.list.tcc.models.User;
 import br.com.todo.list.tcc.service.UserService;
 import io.swagger.annotations.Api;
@@ -73,6 +74,28 @@ public class UserResource {
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		
 		return ResponseEntity.ok().body(userService.save(user));
+	}
+	
+	@GetMapping("/user/auth")
+	@ApiOperation(value = "Busca um usuario e senha e indica se o request passado está correto")
+	public ResponseEntity<User> userToAuth(@RequestBody Login login) {
+		
+		try {
+			
+			User user = userService.findByName(login.getName().toLowerCase());
+			if (user.getPassword() == login.getPassword()) {
+				return ResponseEntity.ok().body(user);
+			} else {
+				return ResponseEntity.internalServerError().build();
+			}
+			
+			
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		
+		
+		
 	}
 	
 }
