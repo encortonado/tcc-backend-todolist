@@ -76,15 +76,15 @@ public class UserResource {
 		return ResponseEntity.ok().body(userService.save(user));
 	}
 	
-	@GetMapping("/user/auth")
+	@PostMapping("/user")
 	@ApiOperation(value = "Busca um usuario e senha e indica se o request passado está correto")
-	public ResponseEntity<User> userToAuth(@RequestBody Login login) {
+	public ResponseEntity<User> userToAuth(@RequestBody User login) {
 		
 		try {
 			
-			User user = userService.findByName(login.getName().toLowerCase());
+			User user = userService.findByName(login.getName());
 			if (user.getPassword() == login.getPassword()) {
-				return ResponseEntity.ok().body(user);
+				return ResponseEntity.ok().body(new User(user.getId(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate(), 0) );
 			} else {
 				return ResponseEntity.internalServerError().build();
 			}
