@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+
 @Entity()
 @Table(name = "TB_USER")
 public class User implements Serializable {
@@ -31,7 +32,8 @@ public class User implements Serializable {
 	private String birthDate;
 	
 	
-	protected int password;
+	
+	protected String password;
 
 	
 	
@@ -41,7 +43,7 @@ public class User implements Serializable {
 		
 	}
 	
-	public User(long id, String name, String lastName, String email, String birthDate, int password) {
+	public User(long id, String name, String lastName, String email, String birthDate, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -92,12 +94,12 @@ public class User implements Serializable {
 	}
 
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 

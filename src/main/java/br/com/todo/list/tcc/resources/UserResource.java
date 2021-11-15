@@ -84,7 +84,7 @@ public class UserResource {
 			
 			User user = userService.findByName(login.getName());
 			if (user.getPassword() == login.getPassword()) {
-				return ResponseEntity.ok().body(new User(user.getId(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate(), 0) );
+				return ResponseEntity.ok().body(new User(user.getId(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate(), "") );
 			} else {
 				return ResponseEntity.internalServerError().build();
 			}
