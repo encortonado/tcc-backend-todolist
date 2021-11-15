@@ -2,6 +2,8 @@ package br.com.todo.list.tcc.resources;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +27,8 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "API REST USUARIOS")
 @CrossOrigin(origins = "*")
 public class UserResource {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserResource.class);
 
 	@Autowired
 	UserService userService;
@@ -81,12 +85,14 @@ public class UserResource {
 	public ResponseEntity<User> userToAuth(@RequestBody User login) {
 		
 		try {
-			
+			LOGGER.info("Reenviando dado");
 			User user = userService.findByName(login.getName());
-			if (user.getPassword() == login.getPassword()) {
+			if (user.getPassword().equals(login.getPassword())) {
 				return ResponseEntity.ok().body(new User(user.getId(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate(), "") );
+				
 			} else {
 				return ResponseEntity.internalServerError().build();
+				
 			}
 			
 			
